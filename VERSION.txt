@@ -1,1 +1,3 @@
-2.0.0-alpha.4
+Conductix 2.0.0-alpha.5
+18/08/2026
+Restauración del módulo de exportación original: Integrantes, Asistencia, Agenda y planificación, Bloqueos y Repertorio en CSV y Word.

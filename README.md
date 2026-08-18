@@ -25,3 +25,7 @@ Se restauró la paleta violeta/morada del Conductix original (claro y oscuro), i
 
 ## 2.0.0-alpha.4 · Orden de integrantes
 Se restaura el selector original **Ordenar por: Apellido / Sección / Nivel o grupo** tanto en Integrantes como en Asistencia. Sección y nivel respetan `display_order` y usan apellido/nombre como desempate.
+
+
+## Alpha 5 · Exportación restaurada
+Se restaura el módulo de exportación de Conductix clásico: Integrantes, Asistencia, Agenda y planificación, Bloqueos de planificación y Repertorio, cada uno en CSV y Word. La asistencia Word conserva el formato matricial mensual con A/X/R. Se mantienen además la copia completa JSON y el resumen global Word.
