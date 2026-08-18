@@ -17,3 +17,7 @@ La migración se entrega en un JSON privado separado; no forma parte del reposit
 
 ## Publicación
 Subir el contenido de esta carpeta a la raíz del repositorio `conductix`, activar GitHub Pages sobre `main`, y después compilar Android mediante `.github/workflows/build-android.yml`.
+
+
+## 2.0.0-alpha.2 · Paleta visual
+Se restauró la paleta violeta/morada del Conductix original (claro y oscuro), incluida la barra superior, controles, estados, PWA y colores nativos Android. No cambia el modelo de datos ni la lógica funcional.
