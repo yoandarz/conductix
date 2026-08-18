@@ -1,0 +1,1 @@
+{"name":"conductix-v2","private":true,"type":"module","scripts":{"test":"node tests/calculations.mjs"}}

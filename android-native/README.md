@@ -1,0 +1,1 @@
+Conductix Android es solo una envoltura WebView de la PWA publicada. No contiene alarmas, receivers, permisos de notificación ni Bridge. MainActivity conserva el tratamiento de insets/barra de estado ya validado en Taskium/Nexit.
