@@ -1,5 +1,1 @@
-Conductix 2.0.0-alpha.2
-18/08/2026
-Base funcional: Conductix Python/Tkinter
-Plantilla técnica: Taskium PWA + IndexedDB + Supabase + Android WebView
-Sin alarmas ni Bridge de Windows.
+2.0.0-alpha.3
