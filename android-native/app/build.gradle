@@ -1,7 +1,7 @@
 plugins { id 'com.android.application' }
 
 android { namespace 'com.conductix.app'; compileSdk 35
-    defaultConfig { applicationId 'com.conductix.app'; minSdk 26; targetSdk 35; versionCode 20002; versionName '2.0.0-alpha.2' }
+    defaultConfig { applicationId 'com.conductix.app'; minSdk 26; targetSdk 35; versionCode 20004; versionName '2.0.0-alpha.4' }
 }
 
 
