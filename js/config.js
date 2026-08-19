@@ -1,4 +1,4 @@
-export const APP_VERSION='2.0.0-alpha.5';
+export const APP_VERSION='2.0.0-alpha.7';
 export const SUPABASE_URL='https://yerekyfrrkxioaniyasx.supabase.co';
 export const SUPABASE_KEY='sb_publishable_C4OM_-WcZvAhSi505VYUjA_TgAkNshM';
 export const TABLES=[

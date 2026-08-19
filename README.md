@@ -1,3 +1,13 @@
+
+## 2.0.0-alpha.7 · Agenda y planificación restaurada
+
+Esta revisión recupera la estructura del Conductix clásico en Agenda y planificación: subpestañas **Nuevo / editar concierto** y **Lista y resumen**, resumen calculado completo del concierto, contador de conciertos visibles, bloqueos nuevos con ámbito **Global** por defecto y calendario mensual con días adyacentes y prioridad visual original (regular amarillo, extra violeta, bloqueo rojo, concierto verde azulado). También corrige el formateador de horas utilizado por Agenda.
+
+
+## 2.0.0-alpha.6 · Auditoría de equivalencia funcional
+
+Esta revisión compara Conductix 2 contra la aplicación Python/Tkinter original y restaura funciones que habían quedado simplificadas: gestión avanzada de secciones y niveles, importación de integrantes entre agrupaciones, estadísticas de asistencia, agenda completa con calendario/bloqueos, repertorio multiagrupación, programas de concierto detallados y herramientas de respaldo/planificación. También corrige el cálculo de ensayos frente a bloqueos y prepara el WebView Android para seleccionar JSON y guardar exportaciones en Descargas/Conductix.
+
 # Conductix 2.0
 Migración de Conductix desde Python/Tkinter + SQLite a una aplicación sincronizada.
 

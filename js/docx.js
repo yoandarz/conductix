@@ -14,4 +14,29 @@ function packageDoc(body,landscape=false){return zip({'[Content_Types].xml':'<?x
 export function makeDocx(title,lines){const body=[paragraph(title,true,32),...lines.map(x=>paragraph(x))].join('');return packageDoc(body,false);}
 export function makeTableDocx(title,rows,{landscape=false,fontSizeHalfPoints=20}={}){if(!rows?.length)return null;const headers=Object.keys(rows[0]);const matrix=rows.map(r=>headers.map(h=>String(r[h]??'')));const body=paragraph(`Conductix - ${title}`,true,32)+paragraph(`Exportado el ${stamp()}`)+table(headers,matrix,fontSizeHalfPoints);return packageDoc(body,landscape);}
 export function makeAttendanceDocx(title,monthSections){let body=paragraph(`Conductix - ${title}`,true,32)+paragraph(`Exportado el ${stamp()}`);for(const section of monthSections){body+=paragraph(section.title,true,26)+table(section.headers,section.rows,24)+paragraph('Leyenda: A = asistió | X = falta | R = retardo');}return packageDoc(body,true);}
-export function downloadBlob(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+
+export function makeProgramDocx({programTitle,concertTitle,date,time,location,participantNames=[],notes='',includeStatus=false,items=[]}){
+ let body=paragraph(programTitle||concertTitle||'Programa de concierto',true,36);
+ if(concertTitle&&concertTitle!==programTitle)body+=paragraph(concertTitle,true,28);
+ const meta=[];if(date)meta.push(`Fecha: ${date}`);if(time)meta.push(`Hora: ${time}`);if(location)meta.push(`Lugar: ${location}`);if(participantNames.length)meta.push(`Agrupaciones: ${participantNames.join(' · ')}`);
+ for(const line of meta)body+=paragraph(line);
+ if(notes)body+=paragraph(`Notas generales: ${notes}`);
+ body+=paragraph('');
+ let number=0;
+ for(const item of items){
+   if(item.kind==='subtitle'){body+=paragraph(item.subtitle||'',true,27);if(item.notes)body+=paragraph(item.notes);continue;}
+   number++;
+   body+=paragraph(`${number}. ${item.title||'Pieza'}`,true,25);
+   const details=[];
+   if(item.composer)details.push(`Compositor: ${item.composer}`);
+   if(item.arranger)details.push(`Arreglista: ${item.arranger}`);
+   if(item.pieceType)details.push(`Tipo: ${item.pieceType}`);
+   if(includeStatus&&item.status)details.push(`Estado: ${item.status}`);
+   if(item.performer)details.push(`Intérprete: ${item.performer}`);
+   if(item.soloists?.length)details.push(`Solista(s): ${item.soloists.join(' · ')}`);
+   if(item.notes)details.push(`Notas: ${item.notes}`);
+   for(const line of details)body+=paragraph(`   ${line}`);
+ }
+ return packageDoc(body,false);
+}
+export function downloadBlob(blob,name){if(window.ConductixNativeAndroid?.saveFile){const r=new FileReader();r.onload=()=>{const data=String(r.result||''),base64=data.includes(',')?data.split(',')[1]:data;window.ConductixNativeAndroid.saveFile(name,blob.type||'application/octet-stream',base64)};r.readAsDataURL(blob);return;}const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}

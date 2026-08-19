@@ -1,1 +1,11 @@
-import assert from'node:assert/strict';import{minutesBetween,concertMetrics}from'../js/calculations.js';assert.equal(minutesBetween('10:40','11:30'),50);const c={id:'c',ensemble_id:'e',concert_date:'2026-09-10',regular_weekdays:'1,3',regular_start_time:'08:15',regular_end_time:'09:15'};const m=concertMetrics(c,[],[{ensemble_id:'e',block_date:'2026-09-03',block_type:'No hay ensayo'}],'2026-09-01');assert.equal(m.regularCount,2);assert.equal(m.totalHours,2);console.log('Conductix calculations: OK');
+import assert from'node:assert/strict';
+import{minutesBetween,concertMetrics}from'../js/calculations.js';
+assert.equal(minutesBetween('10:40','11:30'),50);
+const c={id:'c',ensemble_id:'e',concert_date:'2026-09-10',regular_weekdays:'1,3',regular_start_time:'08:15',regular_end_time:'09:15'};
+let m=concertMetrics(c,[],[{ensemble_id:'e',block_date:'2026-09-03',block_type:'cancel_regular'}],'2026-09-01');
+assert.equal(m.regularCount,2);assert.equal(m.totalHours,2);
+m=concertMetrics(c,[{id:'x',concert_id:'c',rehearsal_date:'2026-09-10',start_time:'12:00',end_time:'13:30'}],[],'2026-09-01');
+assert.equal(m.extraCount,1);assert.equal(m.extraHours,1.5);assert.ok(m.calendarEntries.some(x=>x.kind==='concert'&&x.date==='2026-09-10'));
+m=concertMetrics(c,[{id:'x',concert_id:'c',rehearsal_date:'2026-09-06',start_time:'12:00',end_time:'13:30'}],[{ensemble_id:null,block_date:'2026-09-06',block_type:'full_day'}],'2026-09-01');
+assert.equal(m.extraCount,0);
+console.log('Conductix calculations parity: OK');
