@@ -1,3 +1,3 @@
-Conductix 2.0.0-alpha.8
+Conductix 2.0.0-alpha.9
 19/08/2026
-Corrección móvil/Android: barra de estado nativa independiente y compacta; encabezado responsive sin superposición de logo, contexto ni sincronización.
+Calendario móvil: cada fecha muestra también el día de la semana en la vista vertical. La vista de escritorio conserva el calendario mensual de 7 columnas.

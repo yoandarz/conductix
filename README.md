@@ -46,3 +46,9 @@ Se restaura el módulo de exportación de Conductix clásico: Integrantes, Asist
 - El WebView comienza debajo de la barra de estado, sin duplicar safe-area en el encabezado.
 - En móvil, el encabezado tiene altura automática; institución, agrupación y sincronización ya no desbordan sobre el contenido.
 - Android queda alineado a versionName 2.0.0-alpha.8 / versionCode 20008.
+
+
+## Alpha 9 · calendario móvil con día de la semana
+- En escritorio se conserva el calendario mensual de siete columnas con Lun–Dom.
+- En pantallas móviles, cada fecha de la lista vertical muestra el día de la semana, por ejemplo «Miércoles · 19».
+- Es un cambio exclusivamente web; no requiere recompilar ni reinstalar el APK Android.
