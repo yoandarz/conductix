@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -26,6 +29,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -35,30 +39,71 @@ public class MainActivity extends Activity {
     private static final String APP_URL = "https://yoandarz.github.io/conductix/";
     private static final String HOST = "yoandarz.github.io";
     private static final int FILE_CHOOSER_REQUEST = 4101;
+    private static final int STATUS_COLOR = Color.rgb(36, 20, 61);
+    private static final int NAV_COLOR = Color.rgb(36, 20, 61);
     private WebView webView;
+    private FrameLayout root;
+    private View statusBarScrim;
     private ValueCallback<Uri[]> filePathCallback;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
-        FrameLayout root = new FrameLayout(this);
-        root.setBackgroundColor(Color.rgb(36, 20, 61));
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().setNavigationBarColor(NAV_COLOR);
+
+        root = new FrameLayout(this);
+        root.setBackgroundColor(NAV_COLOR);
+
         webView = new WebView(this);
-        root.addView(webView, new FrameLayout.LayoutParams(-1, -1));
+        FrameLayout.LayoutParams webParams = new FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        );
+        root.addView(webView, webParams);
+
+        statusBarScrim = new View(this);
+        statusBarScrim.setBackgroundColor(STATUS_COLOR);
+        FrameLayout.LayoutParams scrimParams = new FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            0,
+            Gravity.TOP
+        );
+        root.addView(statusBarScrim, scrimParams);
+
         setContentView(root);
-        ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
-            Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
-            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) webView.getLayoutParams();
-            lp.topMargin = bars.top; lp.bottomMargin = bars.bottom; lp.leftMargin = bars.left; lp.rightMargin = bars.right;
-            webView.setLayoutParams(lp);
-            return insets;
-        });
-        ViewCompat.requestApplyInsets(root);
+        configureSystemBars();
         if (Build.VERSION.SDK_INT <= 28 && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 4102);
         }
         configure();
         webView.loadUrl(APP_URL);
+    }
+
+    private void configureSystemBars() {
+        WindowInsetsControllerCompat controller = WindowCompat.getInsetsController(getWindow(), root);
+        controller.setAppearanceLightStatusBars(false);
+        controller.setAppearanceLightNavigationBars(false);
+
+        ViewCompat.setOnApplyWindowInsetsListener(root, (view, windowInsets) -> {
+            Insets bars = windowInsets.getInsets(
+                WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout()
+            );
+
+            FrameLayout.LayoutParams webLp = (FrameLayout.LayoutParams) webView.getLayoutParams();
+            webLp.topMargin = bars.top;
+            webLp.bottomMargin = bars.bottom;
+            webLp.leftMargin = bars.left;
+            webLp.rightMargin = bars.right;
+            webView.setLayoutParams(webLp);
+
+            FrameLayout.LayoutParams scrimLp = (FrameLayout.LayoutParams) statusBarScrim.getLayoutParams();
+            scrimLp.height = bars.top;
+            statusBarScrim.setLayoutParams(scrimLp);
+
+            return windowInsets;
+        });
+        ViewCompat.requestApplyInsets(root);
     }
 
     private void configure() {

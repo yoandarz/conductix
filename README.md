@@ -39,3 +39,10 @@ Se restaura el selector original **Ordenar por: Apellido / Sección / Nivel o gr
 
 ## Alpha 5 · Exportación restaurada
 Se restaura el módulo de exportación de Conductix clásico: Integrantes, Asistencia, Agenda y planificación, Bloqueos de planificación y Repertorio, cada uno en CSV y Word. La asistencia Word conserva el formato matricial mensual con A/X/R. Se mantienen además la copia completa JSON y el resumen global Word.
+
+
+## Alpha 8 · corrección móvil Android
+- La barra de estado Android usa un scrim nativo de altura exacta al inset del sistema.
+- El WebView comienza debajo de la barra de estado, sin duplicar safe-area en el encabezado.
+- En móvil, el encabezado tiene altura automática; institución, agrupación y sincronización ya no desbordan sobre el contenido.
+- Android queda alineado a versionName 2.0.0-alpha.8 / versionCode 20008.

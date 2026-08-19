@@ -1,3 +1,3 @@
-Conductix 2.0.0-alpha.7
+Conductix 2.0.0-alpha.8
 19/08/2026
-Restauración fiel de Agenda y planificación: formulario/lista con resumen completo, contador de visibles, calendario clásico por colores con días adyacentes y bloqueos nuevos globales por defecto.
+Corrección móvil/Android: barra de estado nativa independiente y compacta; encabezado responsive sin superposición de logo, contexto ni sincronización.
