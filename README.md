@@ -52,3 +52,7 @@ Se restaura el módulo de exportación de Conductix clásico: Integrantes, Asist
 - En escritorio se conserva el calendario mensual de siete columnas con Lun–Dom.
 - En pantallas móviles, cada fecha de la lista vertical muestra el día de la semana, por ejemplo «Miércoles · 19».
 - Es un cambio exclusivamente web; no requiere recompilar ni reinstalar el APK Android.
+
+
+## Alpha 10 · corrección de exportación
+Se restauraron las utilidades `exportSafeName`, `exportStamp` y `csvText` que existían en Alpha 5 y se perdieron durante la integración funcional de Alpha 6. Esto corrige el error `exportSafeName is not defined` y rehabilita las rutas de exportación que dependen de esas utilidades.

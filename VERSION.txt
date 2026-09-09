@@ -1,3 +1,3 @@
-Conductix 2.0.0-alpha.9
-19/08/2026
-Calendario móvil: cada fecha muestra también el día de la semana en la vista vertical. La vista de escritorio conserva el calendario mensual de 7 columnas.
+Conductix 2.0.0-alpha.10
+09/09/2026
+Corrección de exportaciones: restauradas exportSafeName, exportStamp y csvText, perdidas al integrar Alpha 6. Vuelven a funcionar Integrantes/Asistencia/Agenda/Bloqueos/Repertorio en Word y CSV, además de la exportación Word de Programas.

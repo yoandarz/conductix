@@ -31,6 +31,9 @@ const DEFAULT_CATEGORY_TEMPLATES={
 const LEGACY_CUSTOM_CATEGORY_TEMPLATES={'Coro voces claras':['Sopranos','Mezzosopranos','Mezosopranos A','Mezosopranos B','Contraltos','Tiples']};
 function fullName(m){return[m?.first_name,m?.last_name].filter(Boolean).join(' ').trim()}
 function todayIso(){return new Date().toISOString().slice(0,10)}
+function exportSafeName(text){return String(text||'exportacion').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');}
+function exportStamp(){const d=new Date(),pad=n=>String(n).padStart(2,'0');return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;}
+function csvText(rowsData){if(!rowsData?.length)return'';const headers=Object.keys(rowsData[0]);const q=v=>{const s=String(v??'');return /[",\r\n]/.test(s)?`"${s.replace(/"/g,'""')}"`:s};return '\ufeff'+[headers.map(q).join(','),...rowsData.map(r=>headers.map(h=>q(r[h])).join(','))].join('\r\n');}
 function timeShort(v){return String(v||'').slice(0,5)}
 function formatHoursValue(value){return Number(value||0).toFixed(2)}
 function safeArray(v){return Array.isArray(v)?v:[]}
